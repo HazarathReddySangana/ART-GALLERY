@@ -1,1 +1,107 @@
+create database artgallery;
+
+use artgallery;
+
+CREATE TABLE artist (
+    artist_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    birthplace VARCHAR(100),
+    age INT,
+    style VARCHAR(100)
+);
+
+
+CREATE TABLE artwork (
+    artwork_id INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(255) NOT NULL,
+    year_created YEAR,
+    price DECIMAL(10, 2),
+    artist_id INT,
+    FOREIGN KEY (artist_id) REFERENCES artist(artist_id)
+);
+
+alter table artwork 
+modify year_created smallint;
+
+describe artwork;
+
+CREATE TABLE gallery (
+    gallery_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    location VARCHAR(255)
+);
+
+
+CREATE TABLE artwork_gallery (
+    artwork_id INT,
+    gallery_id INT,
+    PRIMARY KEY (artwork_id, gallery_id),
+    FOREIGN KEY (artwork_id) REFERENCES artwork(artwork_id),
+    FOREIGN KEY (gallery_id) REFERENCES gallery(gallery_id)
+);
+
+
+INSERT INTO artist (name, birthplace, age, style)
+VALUES 
+    ('Vincent van Gogh', 'Netherlands', 37, 'Post-Impressionism'),
+    ('Pablo Picasso', 'Spain', 91, 'Cubism'),
+    ('Claude Monet', 'France', 86, 'Impressionism');
+
+
+
+INSERT INTO artwork (title, year_created, price, artist_id)
+VALUES 
+    ('Starry Night', 1889, 1000000, 1),
+    ('The Weeping Woman', 1937, 2000000, 2),
+    ('Water Lilies', 1916, 3000000, 3);
+    
+INSERT INTO gallery (name, location)
+VALUES 
+    ('Louvre Museum', 'Paris'),
+    ('The Metropolitan Museum of Art', 'New York'),
+    ('The Tate Modern', 'London');
+    
+
+INSERT INTO artwork_gallery (artwork_id, gallery_id)
+VALUES 
+    (1, 1),  -- 'Starry Night' in Louvre Museum
+    (2, 2),  -- 'The Weeping Woman' in The Metropolitan Museum of Art
+    (3, 3),  -- 'Water Lilies' in The Tate Modern
+    (1, 2);  -- 'Starry Night' also in The Metropolitan Museum of Art
+
+SELECT * FROM artist;
+
+ SELECT * FROM artwork
+WHERE artist_id = 1;
+
+
+SELECT a.title, a.year_created, a.price
+FROM artwork a
+JOIN artwork_gallery ag ON a.artwork_id = ag.artwork_id
+WHERE ag.gallery_id = 1;
+
+SELECT g.name, g.location
+FROM gallery g
+JOIN artwork_gallery ag ON g.gallery_id = ag.gallery_id
+WHERE ag.artwork_id = 1;
+
+SELECT g.name AS gallery_name, SUM(a.price) AS total_value
+FROM gallery g
+JOIN artwork_gallery ag ON g.gallery_id = ag.gallery_id
+JOIN artwork a ON ag.artwork_id = a.artwork_id
+WHERE g.gallery_id = 2
+GROUP BY g.name;
+
+SELECT a.title AS artwork_title, ar.name AS artist_name, g.name AS gallery_name
+FROM artwork a
+JOIN artist ar ON a.artist_id = ar.artist_id
+JOIN artwork_gallery ag ON a.artwork_id = ag.artwork_id
+JOIN gallery g ON ag.gallery_id = g.gallery_id;
+
+
+
+
+
+
+
 
