@@ -48,3 +48,11 @@ Here's a summary of the SQL code with key points for each section:
    - **Retrieve Galleries Showing a Specific Artwork**: Lists galleries displaying a specific artwork (`artwork_id = 1`).
    - **Calculate Total Value of Artworks in a Gallery**: Calculates the combined value of all artworks in a given gallery (`gallery_id = 2`).
    - **Retrieve Detailed Information**: Joins tables to show artwork title, artist name, and gallery name for each artwork.
+
+
+![Screenshot 2024-10-29 141456](https://github.com/user-attachments/assets/e51da745-2554-41a4-8f1e-5787787d3aa7)
+![Screenshot 2024-10-29 141536](https://github.com/user-attachments/assets/b9f02d00-4e4f-47f4-82c1-ba3752d1887c)
+![Screenshot 2024-10-29 141609](https://github.com/user-attachments/assets/cd1dac0a-c45e-481e-828c-5f52f11e08ac)
+![Screenshot 2024-10-29 141635](https://github.com/user-attachments/assets/27204b73-fc85-4adc-bd4d-e5c3d217dee7)
+![Screenshot 2024-10-29 141701](https://github.com/user-attachments/assets/5b723264-5afb-401f-b7fa-ac05c993a12b)
+![Screenshot 2024-10-29 141740](https://github.com/user-attachments/assets/cc33d06a-357b-4d2f-8094-e36ea1ad88df)
